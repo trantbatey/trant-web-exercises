@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Konami Code</title>
+</head>
+<body>
+<h1>Konami Code</h1>
+
+<script src="js/jquery.js"></script>
+<script>
+    "use strict";
+    let code = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65, 13]
+    let index = 0
+
+    function sound(src) {
+        this.sound = document.createElement("audio");
+        this.sound.src = src;
+        this.sound.setAttribute("preload", "auto");
+        this.sound.setAttribute("controls", "none");
+        this.sound.style.display = "none";
+        document.body.appendChild(this.sound);
+        this.play = function(){
+            this.sound.play();
+        }
+        this.stop = function(){
+            this.sound.pause();
+        }
+    }
+
+    $(document).keyup(function(event){
+        console.log("event: " + event.keyCode + " code[" + index + "]: " + code[index]);
+        console.log(event.keyCode === code[index])
+        if (event.keyCode === code[index]) {
+            index++;
+            console.log("index: " + index + " code length: " + code.length)
+            if (index === code.length) {
+                $('body').css('background-color','pink')
+                var ding = new sound("media/ding-sound-effect_2.mp3");
+                ding.play()
+                setTimeout(function () {alert("You have added 30 lives!");}, 100)
+                index = 0;
+            }
+        } else {
+            index = 0;
+        }
+    });
+</script>
+</body>
+</html>
