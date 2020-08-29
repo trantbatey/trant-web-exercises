@@ -7,6 +7,28 @@
     .invisible {
         visibility: hidden;
     }
+    .pic1 {
+        background-image: url("images/mona_lisa.jpg");
+    }
+    .pic2 {
+        background-image: url("images/scream.jpg");
+    }
+    .pic3 {
+        background-image: url("images/pearl_earring.jpg");
+    }
+    .pic-div {
+        display: inline-block;
+        border: saddlebrown 6px solid;
+        background-size: cover;
+        height: 16em;
+        width: 12em;
+        margin: 3em 3em .5em 3em;
+        text-align: center;
+    }
+    .pic-btn {
+        width: 6em;
+        margin: 0 8.2em 3em 8.2em;
+    }
 </style>
 <body>
 
@@ -79,6 +101,52 @@
 </dl>
 <a href="#" id="show-answers">Click to display answers.</a>
 
+<h3 id="arches">Arches</h3>
+<ul id="arches-facts">
+    <li>In Utah</li>
+    <li>Bordered by the Colorado River in the southeast.</li>
+    <li>Known as the site of more than 2,000 natural sandstone arches.</li>
+    <li>The massive, red-hued Delicate Arch in the east.</li>
+    <li>Long, thin Landscape Arch stands in Devils Garden to the north.</li>
+</ul>
+
+<h3 id="big-bend">Big Bend</h3>
+<ul id="big-bend-facts">
+    <li>Big Bend National Park is in southwest Texas</li>
+    <li>It includes the entire Chisos mountain range and a large swath of the Chihuahuan Desert.</li>
+    <li>The Ross Maxwell Scenic Drive leads to the ruins of Sam Nail Ranch.</li>
+    <li>The Santa Elena Canyon, carved by the Rio Grande, features steep limestone cliffs.</li>
+    <li>Langford Hot Springs, near the Mexican border, has pictographs and the foundations of an old bathhouse.</li>
+</ul>
+
+<h3 id="yellowstone">Yellowstone</h3>
+<ul id="yellowstone-facts">
+    <li>DescriptionYellowstone National Park is a nearly 3,500-sq.-mile wilderness recreation area atop a
+        volcanic hot spot. </li>
+    <li>Mostly in Wyoming, the park spreads into parts of Montana and Idaho too. </li>
+    <li>Yellowstone features dramatic canyons, alpine rivers, lush forests, hot springs and gushing geysers, including
+        its most famous, Old Faithful. </li>
+    <li> It's also home to hundreds of animal species, including bears, wolves, bison, elk and antelope.</li>
+    <li>Area: 3,471 sq. miles</li>
+</ul>
+
+<button id="last-fact">Last Fact</button>
+<br><br>
+
+<div class="pic-div pic1">
+</div>
+<div class="pic-div pic2">
+</div>
+<div class="pic-div pic3">
+</div>
+<br>
+
+<div class="pic-btn-div">
+    <button id="btn1" class="pic-btn">Switch</button>
+    <button id="btn2" class="pic-btn">Switch</button>
+    <button id="btn3" class="pic-btn">Switch</button>
+</div>
+
 <script src="js/jquery.js"></script>
 <script>
     "use strict";
@@ -88,9 +156,64 @@
         });
 
         $('dt').click(function () {
-            console.log(this)
             $(this).css('background-color', '#FF0');
         }).css('font-weight', 'bold');
+
+        $('#last-fact').click(function () {
+            $('ul').each(function () {
+                console.log(this)
+                $(this).children('li').last().css('background-color', '#ff0')
+            });
+        });
+
+        $('h3').click(function () {
+            $(this).next().children('li').css('font-weight', 'bold');
+        });
+
+        $('li').click(function () {
+            $(this).parent().children('li').first().css('color', 'blue');
+        });
+
+        $('#btn1').click(function () {
+            let leftDiv = $('.pic-div').first()
+            let middleDiv = $('.pic-div').first().next()
+            let rightDiv = $('.pic-div').last()
+            let leftImage = leftDiv.css('background-image')
+            let middleImage = middleDiv.css('background-image')
+            let rightImage = rightDiv.css('background-image')
+            leftDiv.css('background-image', middleImage)
+            middleDiv.css('background-image', rightImage)
+            rightDiv.css('background-image', leftImage)
+        });
+
+        $('#btn2').click(function () {
+            let randomOption = Math.floor(Math.random() + .5)
+            let leftDiv = $('.pic-div').first()
+            let middleDiv = $('.pic-div').first().next()
+            let rightDiv = $('.pic-div').last()
+            let leftImage = leftDiv.css('background-image')
+            let middleImage = middleDiv.css('background-image')
+            let rightImage = rightDiv.css('background-image')
+            if (randomOption === 0) {
+                leftDiv.css('background-image', middleImage)
+                middleDiv.css('background-image', leftImage)
+            } else {
+                middleDiv.css('background-image', rightImage)
+                rightDiv.css('background-image', middleImage)
+            }
+        });
+
+        $('#btn3').click(function () {
+            let leftDiv = $('.pic-div').first()
+            let middleDiv = $('.pic-div').first().next()
+            let rightDiv = $('.pic-div').last()
+            let leftImage = leftDiv.css('background-image')
+            let middleImage = middleDiv.css('background-image')
+            let rightImage = rightDiv.css('background-image')
+            leftDiv.css('background-image', rightImage)
+            middleDiv.css('background-image', leftImage)
+            rightDiv.css('background-image', middleImage)
+        });
     });
 </script>
 
