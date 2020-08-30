@@ -2,20 +2,25 @@
 <html lang="en">
 <head>
     <title>JQuery Attributes and CSS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
 <style>
     .invisible {
         visibility: hidden;
     }
+
     .pic1 {
         background-image: url("images/mona_lisa.jpg");
     }
+
     .pic2 {
         background-image: url("images/scream.jpg");
     }
+
     .pic3 {
         background-image: url("images/pearl_earring.jpg");
     }
+
     .pic-div {
         display: inline-block;
         border: saddlebrown 6px solid;
@@ -25,12 +30,43 @@
         margin: 3em 3em .5em 3em;
         text-align: center;
     }
+
     .pic-btn {
         width: 6em;
-        margin: 0 8.2em 3em 8.2em;
+        margin: 0 95px 3em 95px;
+    }
+
+    #arches-facts, #big-bend-facts, #yellowstone-facts, #h2-1 {
+        display: none;
+    }
+    body {
+        margin: 10px;
+    }
+
+    .fade {
+        -webkit-transition: opacity 1.5s linear;
+        -moz-transition: opacity 1.5s linear;
+        -o-transition: opacity 1.5s linear;
+        transition: opacity 1.5s linear;
+    }
+    #fadeTest {
+        opacity: 0;
+    }
+    #fadeTest.in {
+        opacity: 1;
     }
 </style>
 <body>
+<div>
+    <h1>Would you like to signup for our news letter? <span>X</span></h1>
+</div>
+<h2 id="h2-1">Please register for our news letter.</h2>
+<h2 id="fadeTest" class="fade">Please register for our news letter.</h2>
+
+<div class="alert alert-warning alert-dismissible fade show">
+    <strong>Warning!</strong> Please enter a valid value in all the required fields before proceeding.
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+</div>
 
 <p>National Parks Facts:</p>
 
@@ -122,10 +158,12 @@
 <h3 id="yellowstone">Yellowstone</h3>
 <ul id="yellowstone-facts">
     <li>DescriptionYellowstone National Park is a nearly 3,500-sq.-mile wilderness recreation area atop a
-        volcanic hot spot. </li>
-    <li>Mostly in Wyoming, the park spreads into parts of Montana and Idaho too. </li>
+        volcanic hot spot.
+    </li>
+    <li>Mostly in Wyoming, the park spreads into parts of Montana and Idaho too.</li>
     <li>Yellowstone features dramatic canyons, alpine rivers, lush forests, hot springs and gushing geysers, including
-        its most famous, Old Faithful. </li>
+        its most famous, Old Faithful.
+    </li>
     <li> It's also home to hundreds of animal species, including bears, wolves, bison, elk and antelope.</li>
     <li>Area: 3,471 sq. miles</li>
 </ul>
@@ -148,9 +186,27 @@
 </div>
 
 <script src="js/jquery.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script>
     "use strict";
-    $(document).ready(function() {
+    $(document).ready(function () {
+
+        function showFade() {
+            $("#fadeTest").addClass("in");
+        }
+
+        setTimeout(function () {
+            showFade();
+        }, 2000);
+
+        function closeFade() {
+            $("#fadeTest").removeClass("in");
+        }
+
+        setTimeout(function () {
+            closeFade();
+        }, 6000);
+
         $('#show-answers').click(function (event) {
             $('dd').toggleClass('invisible');
         });
@@ -167,7 +223,7 @@
         });
 
         $('h3').click(function () {
-            $(this).next().children('li').css('font-weight', 'bold');
+            $(this).next().slideToggle();
         });
 
         $('li').click(function () {
@@ -214,6 +270,14 @@
             middleDiv.css('background-image', leftImage)
             rightDiv.css('background-image', middleImage)
         });
+
+        $('span').click(function () {
+            $('div').first().hide();
+        });
+
+        setTimeout(function () {
+            $('h2').first().fadeIn(2500);
+        }, 4000);
     });
 </script>
 
