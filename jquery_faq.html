@@ -39,6 +39,7 @@
     #arches-facts, #big-bend-facts, #yellowstone-facts, #h2-1 {
         display: none;
     }
+
     body {
         margin: 10px;
     }
@@ -49,9 +50,11 @@
         -o-transition: opacity 1.5s linear;
         transition: opacity 1.5s linear;
     }
+
     #fadeTest {
         opacity: 0;
     }
+
     #fadeTest.in {
         opacity: 1;
     }
@@ -188,97 +191,99 @@
 <script src="js/jquery.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script>
-    "use strict";
-    $(document).ready(function () {
+    (function () { // IFEE
+        "use strict"
+        $(document).ready(function () {
 
-        function showFade() {
-            $("#fadeTest").addClass("in");
-        }
-
-        setTimeout(function () {
-            showFade();
-        }, 2000);
-
-        function closeFade() {
-            $("#fadeTest").removeClass("in");
-        }
-
-        setTimeout(function () {
-            closeFade();
-        }, 6000);
-
-        $('#show-answers').click(function (event) {
-            $('dd').toggleClass('invisible');
-        });
-
-        $('dt').click(function () {
-            $(this).css('background-color', '#FF0');
-        }).css('font-weight', 'bold');
-
-        $('#last-fact').click(function () {
-            $('ul').each(function () {
-                console.log(this)
-                $(this).children('li').last().css('background-color', '#ff0')
-            });
-        });
-
-        $('h3').click(function () {
-            $(this).next().slideToggle();
-        });
-
-        $('li').click(function () {
-            $(this).parent().children('li').first().css('color', 'blue');
-        });
-
-        $('#btn1').click(function () {
-            let leftDiv = $('.pic-div').first()
-            let middleDiv = $('.pic-div').first().next()
-            let rightDiv = $('.pic-div').last()
-            let leftImage = leftDiv.css('background-image')
-            let middleImage = middleDiv.css('background-image')
-            let rightImage = rightDiv.css('background-image')
-            leftDiv.css('background-image', middleImage)
-            middleDiv.css('background-image', rightImage)
-            rightDiv.css('background-image', leftImage)
-        });
-
-        $('#btn2').click(function () {
-            let randomOption = Math.floor(Math.random() + .5)
-            let leftDiv = $('.pic-div').first()
-            let middleDiv = $('.pic-div').first().next()
-            let rightDiv = $('.pic-div').last()
-            let leftImage = leftDiv.css('background-image')
-            let middleImage = middleDiv.css('background-image')
-            let rightImage = rightDiv.css('background-image')
-            if (randomOption === 0) {
-                leftDiv.css('background-image', middleImage)
-                middleDiv.css('background-image', leftImage)
-            } else {
-                middleDiv.css('background-image', rightImage)
-                rightDiv.css('background-image', middleImage)
+            function showFade() {
+                $("#fadeTest").addClass("in");
             }
-        });
 
-        $('#btn3').click(function () {
-            let leftDiv = $('.pic-div').first()
-            let middleDiv = $('.pic-div').first().next()
-            let rightDiv = $('.pic-div').last()
-            let leftImage = leftDiv.css('background-image')
-            let middleImage = middleDiv.css('background-image')
-            let rightImage = rightDiv.css('background-image')
-            leftDiv.css('background-image', rightImage)
-            middleDiv.css('background-image', leftImage)
-            rightDiv.css('background-image', middleImage)
-        });
+            setTimeout(function () {
+                showFade();
+            }, 2000);
 
-        $('span').click(function () {
-            $('div').first().hide();
-        });
+            function closeFade() {
+                $("#fadeTest").removeClass("in");
+            }
 
-        setTimeout(function () {
-            $('h2').first().fadeIn(2500);
-        }, 4000);
-    });
+            setTimeout(function () {
+                closeFade();
+            }, 6000);
+
+            $('#show-answers').click(function (event) {
+                $('dd').toggleClass('invisible');
+            });
+
+            $('dt').click(function () {
+                $(this).css('background-color', '#FF0');
+            }).css('font-weight', 'bold');
+
+            $('#last-fact').click(function () {
+                $('ul').each(function () {
+                    console.log(this)
+                    $(this).children('li').last().css('background-color', '#ff0')
+                });
+            });
+
+            $('h3').click(function () {
+                $(this).next().slideToggle();
+            });
+
+            $('li').click(function () {
+                $(this).parent().children('li').first().css('color', 'blue');
+            });
+
+            $('#btn1').click(function () {
+                let leftDiv = $('.pic-div').first()
+                let middleDiv = $('.pic-div').first().next()
+                let rightDiv = $('.pic-div').last()
+                let leftImage = leftDiv.css('background-image')
+                let middleImage = middleDiv.css('background-image')
+                let rightImage = rightDiv.css('background-image')
+                leftDiv.css('background-image', middleImage)
+                middleDiv.css('background-image', rightImage)
+                rightDiv.css('background-image', leftImage)
+            });
+
+            $('#btn2').click(function () {
+                let randomOption = Math.floor(Math.random() + .5)
+                let leftDiv = $('.pic-div').first()
+                let middleDiv = $('.pic-div').first().next()
+                let rightDiv = $('.pic-div').last()
+                let leftImage = leftDiv.css('background-image')
+                let middleImage = middleDiv.css('background-image')
+                let rightImage = rightDiv.css('background-image')
+                if (randomOption === 0) {
+                    leftDiv.css('background-image', middleImage)
+                    middleDiv.css('background-image', leftImage)
+                } else {
+                    middleDiv.css('background-image', rightImage)
+                    rightDiv.css('background-image', middleImage)
+                }
+            });
+
+            $('#btn3').click(function () {
+                let leftDiv = $('.pic-div').first()
+                let middleDiv = $('.pic-div').first().next()
+                let rightDiv = $('.pic-div').last()
+                let leftImage = leftDiv.css('background-image')
+                let middleImage = middleDiv.css('background-image')
+                let rightImage = rightDiv.css('background-image')
+                leftDiv.css('background-image', rightImage)
+                middleDiv.css('background-image', leftImage)
+                rightDiv.css('background-image', middleImage)
+            });
+
+            $('span').click(function () {
+                $('div').first().hide();
+            });
+
+            setTimeout(function () {
+                $('h2').first().fadeIn(2500);
+            }, 4000);
+        });
+    })();
 </script>
 
 </body>
