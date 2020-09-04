@@ -7,15 +7,19 @@
     .invisible {
         visibility: hidden;
     }
+
     .pic1 {
         background-image: url("images/mona_lisa.jpg");
     }
+
     .pic2 {
         background-image: url("images/scream.jpg");
     }
+
     .pic3 {
         background-image: url("images/pearl_earring.jpg");
     }
+
     .pic-div {
         display: inline-block;
         border: saddlebrown 6px solid;
@@ -25,6 +29,7 @@
         margin: 3em 3em .5em 3em;
         text-align: center;
     }
+
     .pic-btn {
         width: 6em;
         margin: 0 8.2em 3em 8.2em;
@@ -122,10 +127,12 @@
 <h3 id="yellowstone">Yellowstone</h3>
 <ul id="yellowstone-facts">
     <li>DescriptionYellowstone National Park is a nearly 3,500-sq.-mile wilderness recreation area atop a
-        volcanic hot spot. </li>
-    <li>Mostly in Wyoming, the park spreads into parts of Montana and Idaho too. </li>
+        volcanic hot spot.
+    </li>
+    <li>Mostly in Wyoming, the park spreads into parts of Montana and Idaho too.</li>
     <li>Yellowstone features dramatic canyons, alpine rivers, lush forests, hot springs and gushing geysers, including
-        its most famous, Old Faithful. </li>
+        its most famous, Old Faithful.
+    </li>
     <li> It's also home to hundreds of animal species, including bears, wolves, bison, elk and antelope.</li>
     <li>Area: 3,471 sq. miles</li>
 </ul>
@@ -149,72 +156,74 @@
 
 <script src="js/jquery.js"></script>
 <script>
-    "use strict";
-    $(document).ready(function() {
-        $('#show-answers').click(function (event) {
-            $('dd').toggleClass('invisible');
-        });
+    (function () { // IFEE
+        "use strict"
+        $(document).ready(function () {
+            $('#show-answers').click(function (event) {
+                $('dd').toggleClass('invisible');
+            });
 
-        $('dt').click(function () {
-            $(this).css('background-color', '#FF0');
-        }).css('font-weight', 'bold');
+            $('dt').click(function () {
+                $(this).css('background-color', '#FF0');
+            }).css('font-weight', 'bold');
 
-        $('#last-fact').click(function () {
-            $('ul').each(function () {
-                console.log(this)
-                $(this).children('li').last().css('background-color', '#ff0')
+            $('#last-fact').click(function () {
+                $('ul').each(function () {
+                    console.log(this)
+                    $(this).children('li').last().css('background-color', '#ff0')
+                });
+            });
+
+            $('h3').click(function () {
+                $(this).next().children('li').css('font-weight', 'bold');
+            });
+
+            $('li').click(function () {
+                $(this).parent().children('li').first().css('color', 'blue');
+            });
+
+            $('#btn1').click(function () {
+                let leftDiv = $('.pic-div').first()
+                let middleDiv = $('.pic-div').first().next()
+                let rightDiv = $('.pic-div').last()
+                let leftImage = leftDiv.css('background-image')
+                let middleImage = middleDiv.css('background-image')
+                let rightImage = rightDiv.css('background-image')
+                leftDiv.css('background-image', middleImage)
+                middleDiv.css('background-image', rightImage)
+                rightDiv.css('background-image', leftImage)
+            });
+
+            $('#btn2').click(function () {
+                let randomOption = Math.floor(Math.random() + .5)
+                let leftDiv = $('.pic-div').first()
+                let middleDiv = $('.pic-div').first().next()
+                let rightDiv = $('.pic-div').last()
+                let leftImage = leftDiv.css('background-image')
+                let middleImage = middleDiv.css('background-image')
+                let rightImage = rightDiv.css('background-image')
+                if (randomOption === 0) {
+                    leftDiv.css('background-image', middleImage)
+                    middleDiv.css('background-image', leftImage)
+                } else {
+                    middleDiv.css('background-image', rightImage)
+                    rightDiv.css('background-image', middleImage)
+                }
+            });
+
+            $('#btn3').click(function () {
+                let leftDiv = $('.pic-div').first()
+                let middleDiv = $('.pic-div').first().next()
+                let rightDiv = $('.pic-div').last()
+                let leftImage = leftDiv.css('background-image')
+                let middleImage = middleDiv.css('background-image')
+                let rightImage = rightDiv.css('background-image')
+                leftDiv.css('background-image', rightImage)
+                middleDiv.css('background-image', leftImage)
+                rightDiv.css('background-image', middleImage)
             });
         });
-
-        $('h3').click(function () {
-            $(this).next().children('li').css('font-weight', 'bold');
-        });
-
-        $('li').click(function () {
-            $(this).parent().children('li').first().css('color', 'blue');
-        });
-
-        $('#btn1').click(function () {
-            let leftDiv = $('.pic-div').first()
-            let middleDiv = $('.pic-div').first().next()
-            let rightDiv = $('.pic-div').last()
-            let leftImage = leftDiv.css('background-image')
-            let middleImage = middleDiv.css('background-image')
-            let rightImage = rightDiv.css('background-image')
-            leftDiv.css('background-image', middleImage)
-            middleDiv.css('background-image', rightImage)
-            rightDiv.css('background-image', leftImage)
-        });
-
-        $('#btn2').click(function () {
-            let randomOption = Math.floor(Math.random() + .5)
-            let leftDiv = $('.pic-div').first()
-            let middleDiv = $('.pic-div').first().next()
-            let rightDiv = $('.pic-div').last()
-            let leftImage = leftDiv.css('background-image')
-            let middleImage = middleDiv.css('background-image')
-            let rightImage = rightDiv.css('background-image')
-            if (randomOption === 0) {
-                leftDiv.css('background-image', middleImage)
-                middleDiv.css('background-image', leftImage)
-            } else {
-                middleDiv.css('background-image', rightImage)
-                rightDiv.css('background-image', middleImage)
-            }
-        });
-
-        $('#btn3').click(function () {
-            let leftDiv = $('.pic-div').first()
-            let middleDiv = $('.pic-div').first().next()
-            let rightDiv = $('.pic-div').last()
-            let leftImage = leftDiv.css('background-image')
-            let middleImage = middleDiv.css('background-image')
-            let rightImage = rightDiv.css('background-image')
-            leftDiv.css('background-image', rightImage)
-            middleDiv.css('background-image', leftImage)
-            rightDiv.css('background-image', middleImage)
-        });
-    });
+    })();
 </script>
 
 </body>
