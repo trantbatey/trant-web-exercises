@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <title>JQuery Attributes and CSS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
 <style>
     .invisible {
@@ -32,10 +33,43 @@
 
     .pic-btn {
         width: 6em;
-        margin: 0 8.2em 3em 8.2em;
+        margin: 0 95px 3em 95px;
+    }
+
+    #arches-facts, #big-bend-facts, #yellowstone-facts, #h2-1 {
+        display: none;
+    }
+
+    body {
+        margin: 10px;
+    }
+
+    .fade {
+        -webkit-transition: opacity 1.5s linear;
+        -moz-transition: opacity 1.5s linear;
+        -o-transition: opacity 1.5s linear;
+        transition: opacity 1.5s linear;
+    }
+
+    #fadeTest {
+        opacity: 0;
+    }
+
+    #fadeTest.in {
+        opacity: 1;
     }
 </style>
 <body>
+<div>
+    <h1>Would you like to signup for our news letter? <span>X</span></h1>
+</div>
+<h2 id="h2-1">Please register for our news letter.</h2>
+<h2 id="fadeTest" class="fade">Please register for our news letter.</h2>
+
+<div class="alert alert-warning alert-dismissible fade show">
+    <strong>Warning!</strong> Please enter a valid value in all the required fields before proceeding.
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+</div>
 
 <p>National Parks Facts:</p>
 
@@ -155,10 +189,28 @@
 </div>
 
 <script src="js/jquery.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script>
     (function () { // IFEE
         "use strict"
         $(document).ready(function () {
+
+            function showFade() {
+                $("#fadeTest").addClass("in");
+            }
+
+            setTimeout(function () {
+                showFade();
+            }, 2000);
+
+            function closeFade() {
+                $("#fadeTest").removeClass("in");
+            }
+
+            setTimeout(function () {
+                closeFade();
+            }, 6000);
+
             $('#show-answers').click(function (event) {
                 $('dd').toggleClass('invisible');
             });
@@ -175,7 +227,7 @@
             });
 
             $('h3').click(function () {
-                $(this).next().children('li').css('font-weight', 'bold');
+                $(this).next().slideToggle();
             });
 
             $('li').click(function () {
@@ -222,6 +274,14 @@
                 middleDiv.css('background-image', leftImage)
                 rightDiv.css('background-image', middleImage)
             });
+
+            $('span').click(function () {
+                $('div').first().hide();
+            });
+
+            setTimeout(function () {
+                $('h2').first().fadeIn(2500);
+            }, 4000);
         });
     })();
 </script>
