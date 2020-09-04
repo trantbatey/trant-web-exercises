@@ -81,17 +81,19 @@
 
 <script src="js/jquery.js"></script>
 <script>
-    "use strict";
-    $(document).ready(function() {
-        $('#show-answers').click(function (event) {
-            $('dd').toggleClass('invisible');
-        });
+    (function () { // IFEE
+        "use strict"
+        $().ready(function () {
+            $('#show-answers').click(function (event) {
+                $('dd').toggleClass('invisible');
+            });
 
-        $('dt').click(function () {
-            console.log(this)
-            $(this).css('background-color', '#FF0');
-        }).css('font-weight', 'bold');
-    });
+            $('dt').click(function () {
+                console.log(this)
+                $(this).css('background-color', '#FF0');
+            }).css('font-weight', 'bold');
+        });
+    })();
 </script>
 
 </body>
