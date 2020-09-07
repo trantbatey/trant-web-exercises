@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head><!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>My Store</title>
+</head>
+<body>
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to my pretty little store!</h1>
+    <p class="lead">I am just so glad you could come by today and spend some time with me that I am
+        beside myself... Why just look, there I am over there.</p>
+    <hr class="my-4">
+</div>
+
+<main class="container">
+
+    <h1>My Tool Store</h1>
+
+    <table id="products">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Categories</th>
+        </tr>
+        </thead>
+        <tbody id="insertProducts"></tbody>
+    </table>
+    <br>
+    <p class="lead">
+        <a id="btn1" class="btn btn-primary btn-lg" href="#" role="button">Update Table</a>
+    </p>
+
+</main>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+
+<script>
+    (function () { // IFEE
+
+        "use strict"
+        $(document).ready(function () {
+
+            // set button listener to refresh table
+            $('#btn1').click(refreshTable);
+        });
+
+        function refreshTable() {
+            console.log("here")
+
+            // TODO: Create an AJAX GET request for the file under data/inventory.json
+            $.ajax("data/inventory.json").done(updateTable)
+                .fail(function () {
+                    alert("Reading data/inventory.json failed")
+                });
+
+            // TODO: Take the data from inventory.json and append it to the products table
+            function updateTable(data, status, jqXhr) {
+                console.log(data);
+                var htmlInner = ''
+                data.forEach(function (item) {
+                    htmlInner += '<tr>\n'
+                    htmlInner += '<td>' + item["title"] + '</td>\n' +
+                        '<td>' + item["quantity"] + '</td>\n' +
+                        '<td>' + item["price"] + '</td>\n' +
+                        '<td>' + item["categories"] + '</td>\n';
+                })
+                $('#insertProducts').html(htmlInner);
+
+                $('#products').css('border', '3px solid black')
+                $('#products th').css('border', '3px solid black')
+                $('#products td').css('border', '3px solid black')
+                $('#products td').css('padding-left', '3px')
+            }
+
+            //       HINT: Your data should come back as a JSON object; use console.log() to inspect
+            //             its contents and fields
+            //       HINT: You will want to target #insertProducts for your new HTML elements
+
+        }
+    })();
+</script>
+
+</body>
+</html>

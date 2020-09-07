@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head><!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>My Blog</title>
+    <style>
+        .post-content {
+            width: 80%;
+            height: 10em;
+        }
+    </style>
+</head>
+<body>
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to my blog!</h1>
+    <p class="lead">I am just so glad you could come by today and spend some time with me that I am
+        beside myself... Why just look, there I am over there.</p>
+    <hr class="my-4">
+</div>
+
+<main class="container">
+
+    <h1>Blog Posts</h1>
+
+    <div id="posts">
+    </div>
+    <br>
+    <p class="lead">
+        <a id="btn1" class="btn btn-primary btn-lg" href="#" role="button">Update blog</a>
+    </p>
+
+</main>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+
+<script>
+    (function () { // IFEE
+
+        "use strict"
+        $(document).ready(function () {
+
+            // set button listener to refresh table
+            $('#btn1').click(refreshPosts);
+        });
+
+        function refreshPosts() {
+
+            // TODO: Create an AJAX GET request for the file under data/inventory.json
+            $.ajax("data/blog.json").done(updateBlog)
+                .fail(function () {
+                    alert("Reading data/blog.json failed")
+                });
+
+            // TODO: Take the data from inventory.json and append it to the products table
+            function updateBlog(data, status, jqXhr) {
+                var innerHTML = ''
+                data.forEach(function (item) {
+                    innerHTML += '<br><h2>' + item["title"] + '</h2>\n' + '</br>\n' +
+                        '<strong>Date:</strong>&nbsp;' + item["date"] + '&nbsp;&nbsp;&nbsp;&nbsp;' +
+                        getCategories(item["categories"]) +
+                        '<textarea readonly class="post-content">' + item["content"] + '</textarea>\n<br>\n';
+                })
+                $('#posts').html(innerHTML);
+            }
+
+            function getCategories(categories) {
+                var innerHTML = '<strong>Categories:</strong> '
+                categories.forEach(function (item) {
+                    innerHTML += item + '&nbsp;&nbsp;&nbsp;'
+                })
+                innerHTML += '<br>\n';
+                return innerHTML
+            }
+        }
+    })();
+</script>
+
+</body>
+</html>
